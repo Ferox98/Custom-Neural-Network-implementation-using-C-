@@ -1,2 +1,2 @@
 # Custom-Neural-Network-implementation-using-C-
-This C++ Visual Studio project uses Eigen (a lightweight Linear Algebra library) to implement a Neural Network from scratch 
+This C++ project uses Eigen (a lightweight Linear Algebra library) to implement a Neural Network from scratch 
