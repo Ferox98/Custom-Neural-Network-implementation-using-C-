@@ -11,14 +11,13 @@
 using namespace std;
 using namespace Eigen;
 
-typedef tuple<vector<vector<double>>, double> Instance;
+typedef tuple<vector<double>, vector<double>> Instance;
 typedef vector<Instance> Data; // the entire dataset
 
 class Network {
 
-private:
-	int num_layers;
-	vector<int> num_neurons;
+public:
+	vector<int> m_layers;
 	double eta = 0.01; // default learning rate, 
 	// matrices for the weights, activations and biases
 	vector<MatrixXd> weight_matrices;
@@ -34,11 +33,11 @@ public:
 
 	VectorXd& sigmoidPrime(VectorXd& vec);
 	
-	VectorXd& costDerivative(VectorXd output, double y);
+	VectorXd& costDerivative(VectorXd& output, vector<double>& y);
 
 	void SGD(int epochs, int mini_batch_size, Data& training_data, double eta);
 	
 	void updateNetwork(Data& mini_batches);
 
-	tuple<vector<MatrixXd>, vector<VectorXd>> backpropagate(vector<vector<double>>& x, double y);
+	tuple<vector<MatrixXd>, vector<VectorXd>> backpropagate(vector<double>& x, vector<double>& y);
 };
