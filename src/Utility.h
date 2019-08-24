@@ -4,15 +4,8 @@
 
 using namespace std;
 
-double ToDouble(string str) {
-	stringstream ss(str);
-	int val;
-	ss >> val;
-	return (double)val;
-}
-
 // This function reads the csv file and returns a tuple consisting of the predictors X and the output y.
-vector<tuple<vector<double>, vector<double>>>& readCsv(string filename) {
+static vector<tuple<vector<double>, vector<double>>>& readCsv(string filename) {
 	ifstream file(filename);
 	string line;
 	static vector<tuple<vector<double>, vector<double>>> dataset;
@@ -31,7 +24,7 @@ vector<tuple<vector<double>, vector<double>>>& readCsv(string filename) {
 		while (getline(line_stream, token, ',')) {
 			if (cell_count == 0) {
 				for (int i = 0; i < 10; i++) {
-					if ((double)i + 1.0 == ToDouble(token))
+					if ((double)i + 1.0 == atof(token.c_str()))
 						y[i] = 1.0;
 					else
 						y[i] = 0.0;
@@ -39,7 +32,8 @@ vector<tuple<vector<double>, vector<double>>>& readCsv(string filename) {
 				cell_count = 1;
 				continue;
 			}
-			X.push_back(ToDouble(token));
+			// push back normalized value
+			X.push_back(atof(token.c_str()) / 255.0);
 		}
 		dataset.push_back(make_tuple(X, y));
 	}

@@ -7,6 +7,11 @@
 #include <tuple>
 #include <random>
 #include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>
+
+#include "Utility.h"
 
 using namespace std;
 using namespace Eigen;
@@ -24,6 +29,9 @@ public:
 	vector<VectorXd> bias_vectors;
 
 public:
+
+	Network() {}
+
 	Network(vector<int>& layers);
 	
 	inline double sigmoid(double x) {
@@ -31,13 +39,19 @@ public:
 		return 1.0 / (1.0 + exp(-x));
 	}
 
-	VectorXd& sigmoidPrime(VectorXd& vec);
+	VectorXd sigmoidPrime(VectorXd& vec);
 	
-	VectorXd& costDerivative(VectorXd& output, vector<double>& y);
+	VectorXd costDerivative(VectorXd& output, vector<double>& y);
 
 	void SGD(int epochs, int mini_batch_size, Data& training_data, double eta);
 	
 	void updateNetwork(Data& mini_batches);
 
 	tuple<vector<MatrixXd>, vector<VectorXd>> backpropagate(vector<double>& x, vector<double>& y);
+
+	void saveNetwork(string filename);
+
+	void loadNetwork(string filename);
+
+	int predict(vector<double>& x);
 };
