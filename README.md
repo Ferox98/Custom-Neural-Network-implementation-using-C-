@@ -1,5 +1,6 @@
 # Custom-Neural-Network-implementation-using-C-
 This C++ project uses Eigen (a lightweight Linear Algebra library) to implement a Neural Network from scratch. The latest version of Eigen can be found and downloaded at http://eigen.tuxfamily.org/index.php?title=Main_Page.
+
 Example usage:
 ```c++
 // Define the network architecture. In this case, a network with 748 input layers, 2 16-neuron hidden layers and an output layer with 10 // neurons.
